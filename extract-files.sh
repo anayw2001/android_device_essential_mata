@@ -25,9 +25,9 @@ VENDOR=essential
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-STX_ROOT="$MY_DIR"/../../..
+PA_ROOT="$MY_DIR"/../../..
 
-HELPER="$STX_ROOT"/vendor/statix/build/tools/extract_utils.sh
+HELPER="$PA_ROOT"/vendor/pa/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -53,15 +53,14 @@ if [ -z "$SRC" ]; then
 fi
 
 # Initialize the helper
-setup_vendor "$DEVICE" "$VENDOR" "$STX_ROOT" false "$CLEAN_VENDOR"
+setup_vendor "$DEVICE" "$VENDOR" "$PA_ROOT" false "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
-extract "$MY_DIR"/proprietary-files-recovery.txt "$SRC" "$SECTION"
 
-patchelf --add-needed "libbase_shim.so" "$STX_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/bin/imsrcsd
-patchelf --add-needed "libbase_shim.so" "$STX_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib/lib-imsrcs-v2.so
-patchelf --add-needed "libbase_shim.so" "$STX_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib/lib-uceservice.so
-patchelf --add-needed "libbase_shim.so" "$STX_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib64/lib-imsrcs-v2.so
-patchelf --add-needed "libbase_shim.so" "$STX_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib64/lib-uceservice.so
+patchelf --add-needed "libbase_shim.so" "$PA_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/bin/imsrcsd
+patchelf --add-needed "libbase_shim.so" "$PA_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib/lib-imsrcs-v2.so
+patchelf --add-needed "libbase_shim.so" "$PA_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib/lib-uceservice.so
+patchelf --add-needed "libbase_shim.so" "$PA_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib64/lib-imsrcs-v2.so
+patchelf --add-needed "libbase_shim.so" "$PA_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor_overlay/lib64/lib-uceservice.so
 
 "$MY_DIR"/setup-makefiles.sh

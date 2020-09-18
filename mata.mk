@@ -31,6 +31,9 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     otapreopt_script
 
+# APEX updates
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery:64 \
@@ -76,22 +79,21 @@ PRODUCT_PACKAGES += \
     init.mata.rc \
     init.recovery.mata.rc
 
+# Shipping API
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_n_mr1.mk)
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     device/essential/mata
 
 # Telephony
 PRODUCT_PACKAGES += \
-    telephony-ext \
     ims-ext-common \
     ims_ext_common.xml \
     qti-telephony-hidl-wrapper \
     qti_telephony_hidl_wrapper.xml \
     qti-telephony-utils \
     qti_telephony_utils.xml \
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
 
 # Update engine
 PRODUCT_PACKAGES += \
@@ -123,3 +125,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
    WfdCommon
+
+# Vendor blobs
+$(call inherit-product-if-exists, vendor/essential/mata/mata-vendor.mk)
