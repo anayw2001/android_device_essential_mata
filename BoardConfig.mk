@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
-
 DEVICE_PATH := device/essential/mata
 
 # Platform
@@ -66,10 +64,10 @@ BOARD_KERNEL_TAGS_OFFSET := 0x02500000
 BOARD_RAMDISK_OFFSET     := 0x02700000
 BOARD_MKBOOTIMG_ARGS     := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 # Inline kernel build
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_SOURCE := kernel/essential/msm8998
-TARGET_KERNEL_CONFIG := electric_mata_defconfig
-TARGET_KERNEL_CLANG_COMPILE := true
+KERNEL_DEFCONFIG := electric_mata_defconfig
+TARGET_KERNEL_VERSION := 4.4
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
