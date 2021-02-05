@@ -14,13 +14,6 @@
 # limitations under the License.
 #
 
-# Platform
-PRODUCT_USES_QCOM_HARDWARE := true
-PRODUCT_BOARD_PLATFORM := msm8998
-
-# Blur
-TARGET_USES_BLUR := true
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += device/essential/mata/overlay
 PRODUCT_ENFORCE_RRO_TARGETS := \
@@ -170,6 +163,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
+
+# Headers
+PRODUCT_VENDOR_KERNEL_HEADERS := device/essential/mata/kernel-headers
 
 # Health
 PRODUCT_PACKAGES += \
